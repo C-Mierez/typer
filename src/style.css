@@ -1,11 +1,21 @@
+.jetbrains-mono {
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --black: #0a0a0a;
+    --white: #fafafa;
+
+    font-family: "JetBrains Mono", monospace, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
     color-scheme: light dark;
-    color: #fafafa;
-    background-color: #0a0a0a;
+    color: var(--white);
+    background-color: var(--black);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
