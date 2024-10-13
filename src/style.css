@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .jetbrains-mono {
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
@@ -5,9 +9,21 @@
     font-style: normal;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     --black: #0a0a0a;
     --white: #fafafa;
+    --muted: #a3a3a3;
+    --amber-400: #fbbf24;
+    --orange-600: #ea580c;
+    --lime-400: #10b981;
+
+    --letter-spacing: 0.12em;
 
     font-family: "JetBrains Mono", monospace, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -21,4 +37,67 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               Dynamic Classes                              */
+/* -------------------------------------------------------------------------- */
+x-word {
+    position: relative;
+    letter-spacing: var(--letter-spacing);
+    color: var(--muted);
+
+    &.incomplete::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(-1 * var(--letter-spacing));
+
+        height: calc(var(--letter-spacing));
+        background-color: var(--orange-600);
+        border-radius: 10rem;
+    }
+}
+
+x-letter {
+    position: relative;
+
+    &.active {
+        &::before {
+            content: "";
+            position: absolute;
+            left: calc(-1 * var(--letter-spacing));
+            top: 0;
+            bottom: 0;
+
+            width: calc(var(--letter-spacing));
+
+            filter: brightness(1);
+            background-color: var(--amber-400);
+            animation: 2s blink infinite ease-in-out;
+            opacity: 1;
+        }
+
+        &.last::before {
+            left: unset;
+            right: calc(-1 * var(--letter-spacing));
+        }
+    }
+
+    &.correct {
+        color: var(--white);
+    }
+    &.incorrect {
+        color: var(--orange-600);
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
 }
